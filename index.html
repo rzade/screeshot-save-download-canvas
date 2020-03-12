@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="html2canvas.js"></script>
+</head>
+
+<body>
+    <div id="r" style="background-color: #F0F0F1; color: #00cc65; width: 500px;
+    padding-left: 25px; padding-top: 10px;">
+        <strong>Test</strong>
+        asd
+        asd
+        asd
+        as
+        dasac ewfsdf 
+        <hr>
+        dasdsadsadas
+        dasdas
+        dsadasd
+        asd
+        as
+    </div>
+    <input id="btn-Preview-Image" type="button" value="Preview" />
+    <a id="btn-Convert-Html2Image" href="#">Download</a>
+    <br/>
+    <h3>Preview :</h3>
+    <div id="previewImage">
+    </div>
+    <script>
+        $(document).ready(function(){	
+        	var element = $("#r"); // global variable
+        	var getCanvas; // global variable
+        	 
+        	$("#btn-Preview-Image").on('click', function () {
+        	     html2canvas(element, {
+        	     onrendered: function (canvas) {
+        	            $("#previewImage").append(canvas);
+        	            getCanvas = canvas;
+        	         }
+        	     });
+        	});
+        
+        	$("#btn-Convert-Html2Image").on('click', function () {
+        		var imgageData = getCanvas.toDataURL("image/png");
+        		var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+        		$("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+        	});
+        });
+    </script>
+</body>
+
+</html>
